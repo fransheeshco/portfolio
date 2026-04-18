@@ -11,9 +11,9 @@ export async function POST(req: Request) {
 
     const { data, error } = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: ["francisnelson.dev@gmail.com"], // 👈 CHANGE THIS TO YOUR EMAIL
+      to: process.env.RESEND_EMAIL!,
       subject: `New message from ${firstName} ${lastName}`,
-      replyTo: email, // 👈 lets you reply directly to sender
+      replyTo: email, 
       react: EmailTemplate({
         firstName,
         lastName,

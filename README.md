@@ -34,7 +34,7 @@ Ensure you have [Node.js](https://nodejs.org/) installed. This project uses **pn
 ### 2. Clone the Repository
 ```bash
 git clone https://github.com/fransheeshco/portfolio
-cd your-repo-name
+cd portfolio
 ```
 
 
@@ -44,13 +44,14 @@ pnpm install
 ```
 
 ### 4. Set Up Environment Variables
-Create a .env.local file in the root directory and add your credentials:
+Create a .env.local file inside the directory and add your credentials:
 
 RESEND_API_KEY=your_resend_api_key_here
+RESEND_EMAIL=your_email_here
 
 ### 5. Run the Development Server
 ```bash
-pnpm install
+pnpm run dev
 ```
 
 ### Deployment
