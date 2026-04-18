@@ -33,7 +33,7 @@ Ensure you have [Node.js](https://nodejs.org/) installed. This project uses **pn
 
 ### 2. Clone the Repository
 ```bash
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+git clone https://github.com/fransheeshco/portfolio
 cd your-repo-name
 ```
 
