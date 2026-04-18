@@ -57,5 +57,3 @@ pnpm install
 This project is deployed using Vercel for seamless CI/CD.
 
 Automatic Deployments: Every push to the main branch triggers a new build.
-
-Edge Performance: Optimized global delivery via Vercel's edge network.
