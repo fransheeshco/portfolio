@@ -47,6 +47,7 @@ pnpm install
 Create a .env.local file inside the directory and add your credentials:
 
 RESEND_API_KEY=your_resend_api_key_here
+
 RESEND_EMAIL=your_email_here
 
 ### 5. Run the Development Server
