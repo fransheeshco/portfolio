@@ -35,10 +35,13 @@ Ensure you have [Node.js](https://nodejs.org/) installed. This project uses **pn
 ```bash
 git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
 cd your-repo-name
+```
+
 
 ### 3. Install Dependencies
 ```bash
 pnpm install
+```
 
 ### 4. Set Up Environment Variables
 Create a .env.local file in the root directory and add your credentials:
@@ -48,9 +51,7 @@ RESEND_API_KEY=your_resend_api_key_here
 ### 5. Run the Development Server
 ```bash
 pnpm install
-
-### 4. Set Up Environment Variables
-Create a .env.local file in the root directory and add your credentials:
+```
 
 ### Deployment
 This project is deployed using Vercel for seamless CI/CD.
