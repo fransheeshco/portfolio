@@ -2,13 +2,6 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
-import {
-  FaEnvelopeOpen,
-  FaFacebook,
-  FaLinkedin,
-  FaGithub,
-} from "react-icons/fa";
-
 import { cn } from "@/lib/utils";
 
 export default function ContactSection() {
@@ -21,11 +14,9 @@ export default function ContactSection() {
     const formData = new FormData(form);
 
     const payload = {
-      firstName: formData.get("firstName"),
-      lastName: formData.get("lastName"),
+      name: formData.get("name"),
       email: formData.get("email"),
       message: formData.get("message"),
-      company: formData.get("company"),
     };
 
     setLoading(true);
@@ -40,14 +31,13 @@ export default function ContactSection() {
       }).then(async (res) => {
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Failed to send");
-
         form.reset();
       }),
       {
         loading: "Sending message...",
         success: "Message sent successfully.",
         error: (err) => err.message || "Failed to send message.",
-      },
+      }
     );
 
     setLoading(false);
@@ -55,98 +45,47 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="w-full py-20 px-4 sm:px-6 lg:px-0">
-      <div className="mx-auto max-w-5xl space-y-10">
-        <h2 className="text-center text-3xl font-bold">Contact</h2>
+      <div className="mx-auto max-w-xl space-y-10">
+        
+        {/* HEADER */}
+        <div className="text-center space-y-3">
+          <h2 className="text-3xl font-semibold leading-snug">
+            Let’s build something meaningful together.
+          </h2>
 
-        <div className="flex flex-col gap-10 md:flex-row">
-          {/* LEFT - FORM */}
-          <div className="w-full md:flex-[3]">
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-xl font-semibold">Get in Touch</h3>
-                <p className="text-muted-foreground mt-1 text-sm">
-                  For collaborations, inquiries, or just a chat — feel free to
-                  send a message.
-                </p>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Honeypot */}
-                <input
-                  type="text"
-                  name="company"
-                  className="hidden"
-                  autoComplete="off"
-                />
-
-                {/* Name */}
-                <div className="flex gap-3">
-                  <Input name="firstName" placeholder="First name" />
-                  <Input name="lastName" placeholder="Last name" />
-                </div>
-
-                {/* Email */}
-                <Input name="email" type="email" placeholder="Email" />
-
-                {/* Message */}
-                <Textarea name="message" placeholder="Message" />
-
-                {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className={cn(
-                    "w-full rounded-md px-4 py-2 text-sm font-medium transition",
-                    "bg-primary text-primary-foreground",
-                    "hover:opacity-90",
-                    "disabled:opacity-50",
-                  )}
-                >
-                  {loading ? "Sending..." : "Send Message"}
-                </button>
-              </form>
-            </div>
-          </div>
-
-          {/* RIGHT - LINKS */}
-          <div className="w-full md:flex-[2] space-y-2 md:pl-8">
-            <ContactItem
-              icon={<FaEnvelopeOpen />}
-              label="Email"
-              value="francisnelson.dev@gmail.com"
-              href="mailto:francisnelson.dev@gmail.com"
-            />
-
-            <ContactItem
-              icon={<FaFacebook />}
-              label="Facebook"
-              value="Francis Nelson Cejas"
-              href="https://www.facebook.com/francisnelson.cejas"
-            />
-
-            <ContactItem
-              icon={<FaLinkedin />}
-              label="LinkedIn"
-              value="Francis Nelson Cejas"
-              href="https://www.linkedin.com/in/francis-nelson-cejas-b10ba73a9/"
-            />
-
-            <ContactItem
-              icon={<FaGithub />}
-              label="GitHub"
-              value="fransheeshco"
-              href="https://github.com/fransheeshco"
-            />
-          </div>
+          <p className="text-sm text-muted-foreground">
+            Have an idea, project, or just want to connect? Send me a message.
+          </p>
         </div>
+
+        {/* FORM */}
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <MinimalInput name="name" placeholder="Your Name" />
+          <MinimalInput name="email" type="email" placeholder="Your Email" />
+          <MinimalTextarea name="message" placeholder="Your Message" />
+
+          <button
+            type="submit"
+            disabled={loading}
+            className={cn(
+              "w-full mt-4 px-4 py-2 text-sm font-medium transition",
+              "border border-primary text-primary",
+              "hover:bg-primary hover:text-primary-foreground",
+              "disabled:opacity-50"
+            )}
+          >
+            {loading ? "Sending..." : "Send Message"}
+          </button>
+        </form>
+
       </div>
     </section>
   );
 }
 
-/* ---------------- INPUT COMPONENTS (THEME CONSISTENT) ---------------- */
+/* ---------------- MINIMAL INPUTS ---------------- */
 
-function Input({
+function MinimalInput({
   className,
   ...props
 }: React.InputHTMLAttributes<HTMLInputElement>) {
@@ -155,17 +94,19 @@ function Input({
       {...props}
       required
       className={cn(
-        "w-full rounded-md border bg-background px-3 py-2 text-sm",
-        "outline-none transition",
-        "border-input",
-        "focus:ring-2 focus:ring-ring focus:ring-offset-2",
-        className,
+        "w-full bg-transparent border-0 border-b-2",
+        "border-border", // theme-aware base line
+        "px-0 py-2 text-sm",
+        "outline-none transition-all duration-200",
+        "focus:border-primary", // consistent in both themes
+        "placeholder:text-muted-foreground",
+        className
       )}
     />
   );
 }
 
-function Textarea({
+function MinimalTextarea({
   className,
   ...props
 }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
@@ -173,44 +114,16 @@ function Textarea({
     <textarea
       {...props}
       required
-      rows={6}
+      rows={5}
       className={cn(
-        "w-full resize-none rounded-md border bg-background px-3 py-2 text-sm",
-        "outline-none transition",
-        "border-input",
-        "focus:ring-2 focus:ring-ring focus:ring-offset-2",
-        className,
+        "w-full bg-transparent border-0 border-b-2",
+        "border-border",
+        "px-0 py-2 text-sm resize-none",
+        "outline-none transition-all duration-200",
+        "focus:border-primary",
+        "placeholder:text-muted-foreground",
+        className
       )}
     />
-  );
-}
-
-/* ---------------- CONTACT ITEM ---------------- */
-
-function ContactItem({
-  icon,
-  label,
-  value,
-  href,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  href: string;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center gap-3 rounded-md p-3 transition hover:bg-muted"
-    >
-      <div className="text-primary">{icon}</div>
-
-      <div className="flex flex-col">
-        <span className="text-xs text-muted-foreground">{label}</span>
-        <span className="text-sm font-medium">{value}</span>
-      </div>
-    </a>
   );
 }

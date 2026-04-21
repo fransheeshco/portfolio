@@ -10,15 +10,13 @@ import {
 } from "@react-email/components";
 
 type Props = {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   message: string;
 };
 
 export function EmailTemplate({
-  firstName,
-  lastName,
+  name,
   email,
   message,
 }: Props) {
@@ -32,7 +30,7 @@ export function EmailTemplate({
           <Heading>New Contact Message</Heading>
 
           <Text>
-            <strong>Name:</strong> {firstName} {lastName}
+            <strong>Name:</strong> {name}
           </Text>
 
           <Text>
