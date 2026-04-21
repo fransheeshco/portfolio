@@ -30,14 +30,23 @@ export default function ContactSection() {
         body: JSON.stringify(payload),
       }).then(async (res) => {
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Failed to send");
+
+        if (!res.ok) {
+          throw new Error(data.message || "Failed to send message");
+        }
+
+        if (!data.success) {
+          throw new Error(data.message || "Failed to send message");
+        }
+
         form.reset();
+        return data;
       }),
       {
         loading: "Sending message...",
         success: "Message sent successfully.",
-        error: (err) => err.message || "Failed to send message.",
-      }
+        error: (err) => err.message || "Something went wrong.",
+      },
     );
 
     setLoading(false);
@@ -46,7 +55,6 @@ export default function ContactSection() {
   return (
     <section id="contact" className="w-full py-20 px-4 sm:px-6 lg:px-0">
       <div className="mx-auto max-w-xl space-y-10">
-        
         {/* HEADER */}
         <div className="text-center space-y-3">
           <h2 className="text-3xl font-semibold leading-snug">
@@ -71,13 +79,12 @@ export default function ContactSection() {
               "w-full mt-4 px-4 py-2 text-sm font-medium transition",
               "border border-primary text-primary",
               "hover:bg-primary hover:text-primary-foreground",
-              "disabled:opacity-50"
+              "disabled:opacity-50",
             )}
           >
             {loading ? "Sending..." : "Send Message"}
           </button>
         </form>
-
       </div>
     </section>
   );
@@ -100,7 +107,7 @@ function MinimalInput({
         "outline-none transition-all duration-200",
         "focus:border-primary", // consistent in both themes
         "placeholder:text-muted-foreground",
-        className
+        className,
       )}
     />
   );
@@ -122,7 +129,7 @@ function MinimalTextarea({
         "outline-none transition-all duration-200",
         "focus:border-primary",
         "placeholder:text-muted-foreground",
-        className
+        className,
       )}
     />
   );
