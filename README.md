@@ -3,7 +3,7 @@
 A modern, responsive portfolio website built with **Next.js** to showcase developer projects, skills, and experience.
 
 ## Live Demo
-Check out the live site here: [france-portfolio.vercel.app](https://france-portfolio-1e3efvtjf-francis-nelsons-projects.vercel.app/)
+Check out the live site here: [frances-portfolio-woad.vercel.app](https://frances-portfolio-woad.vercel.app)
 
 ---
 
