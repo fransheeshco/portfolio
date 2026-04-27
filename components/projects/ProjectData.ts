@@ -36,7 +36,7 @@ export const projects = [
       { name: "Supabase", icon: SiSupabase },
     ],
     github: "https://github.com/fransheeshco/ccc181-ssis-web",
-    photo: "/Oracle.png",
+    photo: "/sssissss.png",
   },
   {
     title: "Quanta Finance Tracker",
