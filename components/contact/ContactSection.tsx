@@ -53,16 +53,16 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="w-full py-20 px-4 sm:px-6 lg:px-0">
-      <div className="mx-auto max-w-xl space-y-10">
+    <section id="contact" className="w-full bg-[linear-gradient(180deg,transparent,rgba(249,115,22,0.06))] px-4 py-20 sm:px-6 lg:px-0">
+      <div className="mx-auto max-w-xl space-y-10 rounded-[2rem] border border-orange/10 bg-card/80 p-7 shadow-[0_18px_55px_rgba(41,27,14,0.08)] sm:p-10">
         {/* HEADER */}
         <div className="text-center space-y-3">
-          <h2 className="text-3xl font-semibold leading-snug">
-            Let’s build something meaningful together.
+          <h2 className="text-3xl font-black leading-snug">
+            You got something you want to <span className="text-orange">make?</span>
           </h2>
 
           <p className="text-sm text-muted-foreground">
-            Have an idea, project, or just want to connect? Send me a message.
+            Or maybe just want to debate? Don't be shy, send me an email.
           </p>
         </div>
 
@@ -77,8 +77,8 @@ export default function ContactSection() {
             disabled={loading}
             className={cn(
               "w-full mt-4 px-4 py-2 text-sm font-medium transition",
-              "border border-primary text-primary",
-              "hover:bg-primary hover:text-primary-foreground",
+              "rounded-full border border-orange bg-orange text-white shadow-[0_12px_28px_rgba(234,88,12,0.2)]",
+              "hover:bg-orange-dark",
               "disabled:opacity-50",
             )}
           >
@@ -105,7 +105,7 @@ function MinimalInput({
         "border-border", // theme-aware base line
         "px-0 py-2 text-sm",
         "outline-none transition-all duration-200",
-        "focus:border-primary", // consistent in both themes
+        "focus:border-orange",
         "placeholder:text-muted-foreground",
         className,
       )}
@@ -127,7 +127,7 @@ function MinimalTextarea({
         "border-border",
         "px-0 py-2 text-sm resize-none",
         "outline-none transition-all duration-200",
-        "focus:border-primary",
+        "focus:border-orange",
         "placeholder:text-muted-foreground",
         className,
       )}

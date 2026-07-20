@@ -1,19 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import NavBar from "@/components/layout/NavBar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
-import BackgroundOrbs from "@/components/Background-Orbs";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "france's portfolio",
+  title: "Francis Cejas — Developer, Debater & Explorer",
+  description:
+    "Computer Science student building practical software and exploring mathematics, artificial intelligence, and ideas worth debating.",
 };
 
 
@@ -24,8 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-full flex flex-col antialiased pt-10`}>
-        <BackgroundOrbs />
+      <body className="min-h-full flex flex-col antialiased">
         <Toaster richColors position="top-right" />
         <ThemeProvider>
           <NavBar />

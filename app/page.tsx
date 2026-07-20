@@ -2,25 +2,28 @@ import AboutMe from "@/components/about/AboutSection";
 import ProjectsSection from "@/components/projects/ProjectSection";
 import ExperienceSection from "@/components/experience/ExperienceSection";
 import ContactSection from "@/components/contact/ContactSection";
+import PortfolioIntro from "@/components/about/PortfolioIntro";
+import SectionTransition from "@/components/layout/SectionTransition";
 
 export default function Home() {
   return (
     <>
-      <section>
+      <PortfolioIntro />
+      <SectionTransition className="snap-start snap-always">
         <AboutMe />
-      </section>
+      </SectionTransition>
 
-      <section id="projects"> 
+      <SectionTransition id="projects" className="snap-start snap-always">
         <ProjectsSection />
-      </section>
+      </SectionTransition>
 
-      <section id="experience">
+      <SectionTransition id="experience" className="snap-start snap-always">
         <ExperienceSection />
-      </section>
+      </SectionTransition>
 
-      <section id="contact">
+      <SectionTransition id="contact" className="snap-start snap-always">
         <ContactSection />
-      </section>
+      </SectionTransition>
     </>
   );
 }

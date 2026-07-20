@@ -1,10 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FaGithub } from "react-icons/fa";
 import { ExternalLink } from "lucide-react";
+import Image from "next/image";
 
 interface TechItem {
   name: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 interface Project {
@@ -21,24 +22,27 @@ export function ProjectCard({ project }: { project: Project }) {
     <Card
       className="
         group flex flex-col h-full
-        transition-all duration-300 border-border/50
-        hover:scale-[1.02] hover:shadow-lg
+        rounded-3xl border-orange/10 bg-card/85
+        transition-all duration-300
+        hover:-translate-y-1 hover:border-orange/30 hover:shadow-[0_18px_45px_rgba(234,88,12,0.12)]
       "
     >
       {/* Header */}
       <CardHeader>
-        <CardTitle className="text-lg font-bold">{project.title}</CardTitle>
+        <CardTitle className="text-lg font-bold group-hover:text-orange transition-colors">{project.title}</CardTitle>
       </CardHeader>
 
       {/* Content */}
       <CardContent className="flex flex-col flex-1 space-y-4">
         {/* Photo */}
         {project.photo && (
-          <div className="w-full h-48 overflow-hidden rounded-md">
-            <img
+          <div className="relative h-48 w-full overflow-hidden rounded-2xl">
+            <Image
               src={project.photo}
               alt={project.title}
-              className="w-full h-full object-cover"
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover"
             />
           </div>
         )}
@@ -74,7 +78,7 @@ export function ProjectCard({ project }: { project: Project }) {
         {/* Bottom section */}
         <div className="mt-auto flex flex-col gap-3 pt-4">
           {/* Divider */}
-          <div className="h-px w-full bg-border/60" />
+          <div className="h-px w-full bg-orange/15" />
 
           {/* Links */}
           <div className="flex gap-4">
