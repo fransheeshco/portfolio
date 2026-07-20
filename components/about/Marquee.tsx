@@ -23,6 +23,7 @@ import {
 import { VscAzure } from "react-icons/vsc";
 import { FaDatabase } from "react-icons/fa";
 import { TbApi } from "react-icons/tb";
+import type { ComponentType } from "react";
 
 const techStack = [
   { name: "Python", icon: SiPython },
@@ -50,7 +51,13 @@ const techStack = [
   { name: "Database Design", icon: FaDatabase },
 ];
 
-const TechItem = ({ name, icon: Icon }: { name: string; icon: any }) => {
+const TechItem = ({
+  name,
+  icon: Icon,
+}: {
+  name: string;
+  icon: ComponentType<{ className?: string }>;
+}) => {
   return (
     <div
       className={cn(

@@ -1,11 +1,9 @@
 "use client";
 
 import HeroIllustration from "@/components/about/HeroIllustration";
-import { Button } from "@/components/ui/button";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import {
-  ArrowDown,
   BrainCircuit,
   Code2,
   FunctionSquare,
@@ -21,17 +19,17 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 const interests = [
   {
     title: "Full-Stack Developer",
-    copy: "I like building things people can use!",
+    copy: "I build end to end applications!",
     icon: Code2,
   },
   {
     title: "Debater",
-    copy: "I debate on the weekends!",
+    copy: "I debate a lot on the weekends!",
     icon: MessagesSquare,
   },
   {
     title: "Math Enthusiast",
-    copy: "Cool concepts hard to learn.",
+    copy: "Cool concepts, very hard to learn.",
     icon: FunctionSquare,
   },
   {
@@ -42,7 +40,7 @@ const interests = [
 ];
 
 const profileDetails = [
-  { label: "Projects", value: "Selected work", icon: FolderKanban },
+  { label: "Projects", value: "3+", icon: FolderKanban },
   { label: "Achievements", value: "Always growing", icon: Trophy },
   { label: "Course", value: "BS Computer Science", icon: BookOpen },
   { label: "Curious", value: "By nature", icon: Sparkles },
@@ -136,17 +134,17 @@ export default function AboutMe() {
       </div>
 
       <div className="mx-auto grid max-w-[1440px] items-start gap-7 lg:grid-cols-[0.78fr_1.22fr] lg:gap-12 xl:gap-16">
-        <div className="relative z-0 order-2 lg:order-1 lg:pt-8">
+        <div className="relative z-0 order-1 lg:pt-8">
           <ShufflingIdentity />
           <div className="-mt-5 lg:-mt-9">
             <HeroIllustration />
           </div>
         </div>
 
-        <div className="relative z-20 order-1 lg:order-2 lg:pt-2 before:pointer-events-none before:absolute before:-inset-y-4 before:-left-12 before:-right-4 before:-z-10 before:hidden before:bg-gradient-to-r before:from-transparent before:from-0% before:via-background/70 before:via-45% before:to-background before:to-82% lg:before:block">
+        <div className="relative z-20 order-2 lg:pt-2 before:pointer-events-none before:absolute before:-inset-y-4 before:-left-12 before:-right-4 before:-z-10 before:hidden before:bg-gradient-to-r before:from-transparent before:from-0% before:via-background/70 before:via-45% before:to-background before:to-82% lg:before:block">
           <motion.h1
             {...enter(0.12)}
-            className="max-w-[780px] text-balance text-[clamp(2.2rem,3.75vw,4.2rem)] font-black leading-[1] tracking-[-0.05em] text-foreground"
+            className="mx-auto max-w-[780px] text-balance text-center text-[clamp(2.2rem,3.75vw,4.2rem)] font-black leading-[1] tracking-[-0.05em] text-foreground lg:mx-0 lg:text-left"
           >
             I like building <span className="text-orange">software</span> and{" "}
             <span className="relative inline-block text-orange">debating </span> ideas.
@@ -154,26 +152,15 @@ export default function AboutMe() {
 
           <motion.div
             {...enter(0.3)}
-            className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+            className="mt-6"
           >
-            <p className="max-w-xl text-sm font-medium leading-6 text-muted-foreground sm:text-base">
+            <p className="mx-auto max-w-xl text-center text-sm font-medium leading-6 text-muted-foreground sm:text-base lg:mx-0 lg:text-left">
               <span className="font-bold text-foreground">
                 Computer Science student
               </span>{" "}
               building practical software while exploring mathematics,
               artificial intelligence, and ideas worth debating.
             </p>
-            <Button
-              asChild
-              className="group h-14 shrink-0 justify-between gap-5 rounded-full bg-orange py-1 pl-6 pr-1 text-base font-bold text-white shadow-[0_14px_30px_rgba(234,88,12,0.25)] hover:bg-orange-dark"
-            >
-              <a href="#projects">
-                View my work
-                <span className="grid size-12 place-items-center rounded-full bg-white text-orange transition-transform group-hover:translate-y-0.5">
-                  <ArrowDown className="size-5" />
-                </span>
-              </a>
-            </Button>
           </motion.div>
 
           <div className="mt-6 flex items-start gap-3">
@@ -203,24 +190,26 @@ export default function AboutMe() {
 
               <motion.div
                 {...enter(0.54)}
-                className="mt-4 grid grid-cols-2 overflow-hidden rounded-3xl border border-orange/10 bg-background/80 px-2 py-1.5 shadow-[0_14px_40px_rgba(41,27,14,0.07)] backdrop-blur sm:grid-cols-4 sm:rounded-full"
+                className="mt-4 grid grid-cols-2 overflow-hidden rounded-3xl border border-orange/10 bg-background/80 p-2 shadow-[0_14px_40px_rgba(41,27,14,0.07)] backdrop-blur sm:grid-cols-4 sm:rounded-full sm:px-2 sm:py-1.5"
               >
                 {profileDetails.map((detail, index) => (
                   <div
                     key={detail.label}
-                    className={`flex items-center justify-center gap-2 px-2 py-2 ${
-                      index > 0 ? "sm:border-l sm:border-orange/10" : ""
-                    }`}
+                    className={`flex min-w-0 items-center justify-start gap-2 px-3 py-3 sm:justify-center sm:px-2 sm:py-2 ${
+                      index % 2 === 1 ? "border-l border-orange/10" : ""
+                    } ${
+                      index >= 2 ? "border-t border-orange/10 sm:border-t-0" : ""
+                    } ${index > 0 ? "sm:border-l sm:border-orange/10" : ""}`}
                   >
                     <detail.icon
-                      className="size-4 shrink-0 text-orange"
+                      className="size-5 shrink-0 text-orange sm:size-4"
                       strokeWidth={1.8}
                     />
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-xs font-bold leading-tight">
                         {detail.label}
                       </p>
-                      <p className="text-[10px] text-muted-foreground">
+                      <p className="truncate text-[10px] text-muted-foreground">
                         {detail.value}
                       </p>
                     </div>
@@ -253,6 +242,7 @@ export default function AboutMe() {
           </div>
         </div>
       </div>
+
     </section>
   );
 }
