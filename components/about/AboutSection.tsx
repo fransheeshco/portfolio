@@ -81,7 +81,7 @@ function ShufflingIdentity() {
     };
 
     const firstShuffle = window.setTimeout(shuffle, 1200);
-    const repeatShuffle = window.setInterval(shuffle, 4300);
+    const repeatShuffle = window.setInterval(shuffle, 3000);
 
     return () => {
       window.clearTimeout(firstShuffle);
