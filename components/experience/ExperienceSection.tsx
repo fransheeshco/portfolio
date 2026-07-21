@@ -15,7 +15,7 @@ type TimelineItem = {
 const timeline: TimelineItem[] = [
   {
     organization: "Mata Technologies",
-    title: "React Native Mobile Developer Intern",
+    title: "Software Engineering Intern",
     period: "June 2026 – July 2026",
     type: "Experience",
   },
