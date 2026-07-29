@@ -22,21 +22,21 @@ export function ProjectCard({ project }: { project: Project }) {
     <Card
       className="
         group flex flex-col h-full
-        rounded-3xl border-orange/10 bg-card/85
+        rounded-lg border bg-card/85
         transition-all duration-300
-        hover:-translate-y-1 hover:border-orange/30 hover:shadow-[0_18px_45px_rgba(234,88,12,0.12)]
+        hover:-translate-y-1 hover:border-orange
       "
     >
       {/* Header */}
       <CardHeader>
-        <CardTitle className="text-lg font-bold group-hover:text-orange transition-colors">{project.title}</CardTitle>
+        <CardTitle className="text-lg font-bold">{project.title}</CardTitle>
       </CardHeader>
 
       {/* Content */}
       <CardContent className="flex flex-col flex-1 space-y-4">
         {/* Photo */}
         {project.photo && (
-          <div className="relative h-48 w-full overflow-hidden rounded-2xl">
+          <div className="relative h-48 w-full overflow-hidden rounded-md">
             <Image
               src={project.photo}
               alt={project.title}

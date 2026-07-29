@@ -1,84 +1,43 @@
 "use client";
 
 import { ThemeToggle } from "@/components/layout/theme-toggle";
-import { motion } from "framer-motion";
-import { Send } from "lucide-react";
-import { useEffect, useState } from "react";
 
 const navItems = [
-  { name: "About", href: "#about", id: "about" },
-  { name: "Tech Stack", href: "#tech-stack", id: "tech-stack" },
-  { name: "Projects", href: "#projects", id: "projects" },
-  { name: "Experience & Education", href: "#experience", id: "experience" },
+  { name: "About", href: "#about" },
+  { name: "Tech Stack", href: "#tech-stack" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Certificates", href: "#certifications" },
+  { name: "Contact", href: "#contact" },
 ];
-const observedSectionIds = [...navItems.map((item) => item.id), "contact"];
 
 export default function NavBar() {
-  const [activeSection, setActiveSection] = useState("about");
-
-  useEffect(() => {
-    const sections = observedSectionIds
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => Boolean(section));
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.find((entry) => entry.isIntersecting);
-
-        if (visible) setActiveSection(visible.target.id);
-      },
-      {
-        rootMargin: "-15% 0px -75% 0px",
-        threshold: 0,
-      },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div className="fixed left-0 top-0 z-50 w-full px-4 py-3 sm:px-8">
-      <nav
-        className="mx-auto flex h-16 max-w-[1500px] items-center px-1 sm:px-3"
-      >
-        <div className="ml-auto hidden items-center gap-1 md:flex">
+    <header className="fixed inset-x-0 top-0 z-50 border-b bg-background/90 backdrop-blur-xl">
+      <nav className="mx-auto flex h-[72px] max-w-7xl items-center gap-5 px-5 sm:px-8 lg:px-12">
+        <a href="#" className="flex items-center gap-3" aria-label="Francis Cejas, home">
+          <span className="grid size-9 place-items-center border border-foreground font-black tracking-tighter">
+            FC
+          </span>
+          <span className="text-xs font-black uppercase tracking-[0.18em]">
+            Francis Cejas
+          </span>
+        </a>
+        <div className="ml-auto hidden items-center gap-7 lg:flex">
           {navItems.map((item) => (
             <a
               key={item.name}
               href={item.href}
-              onClick={() => setActiveSection(item.id)}
-              className={`relative rounded-full px-4 py-2 text-sm font-semibold transition-colors hover:text-orange focus-visible:outline-2 focus-visible:outline-orange ${
-                activeSection === item.id
-                  ? "text-foreground"
-                  : "text-muted-foreground"
-              }`}
+              className="text-xs font-semibold text-muted-foreground transition hover:text-orange"
             >
               {item.name}
-              {activeSection === item.id && (
-                <motion.span
-                  layoutId="active-nav-dot"
-                  className="absolute -bottom-0.5 left-1/2 size-1.5 -translate-x-1/2 rounded-full bg-orange"
-                  transition={{ type: "spring", stiffness: 380, damping: 28 }}
-                  aria-hidden="true"
-                />
-              )}
             </a>
           ))}
         </div>
-
-        <div className="ml-auto flex items-center gap-2 md:ml-4">
-          <a
-            href="#contact"
-            onClick={() => setActiveSection("contact")}
-            className="flex h-10 items-center gap-2 rounded-full bg-orange px-4 text-sm font-bold text-white shadow-[0_8px_20px_rgba(234,88,12,0.22)] transition hover:-translate-y-0.5 hover:bg-orange-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
-          >
-            <Send className="size-4" />
-            <span className="hidden sm:inline">Let&apos;s talk</span>
-          </a>
+        <div className="ml-auto lg:ml-2">
           <ThemeToggle />
         </div>
       </nav>
-    </div>
+    </header>
   );
 }

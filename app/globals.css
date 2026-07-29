@@ -93,8 +93,8 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --orange: oklch(0.65 0.22 43);
-  --orange-dark: oklch(0.57 0.2 39);
+  --orange: oklch(0.61 0.22 255);
+  --orange-dark: oklch(0.52 0.22 258);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -137,8 +137,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --orange: oklch(0.72 0.2 48);
-  --orange-dark: oklch(0.66 0.21 43);
+  --orange: oklch(0.7 0.18 252);
+  --orange-dark: oklch(0.63 0.19 254);
 }
 
 @layer base {
@@ -148,14 +148,12 @@
   body {
     @apply bg-background text-foreground;
     font-family: Arial, Helvetica, sans-serif;
-    background-image:
-      radial-gradient(circle at 12% 13%, color-mix(in oklab, var(--orange) 7%, transparent) 0, transparent 24rem),
-      radial-gradient(circle at 88% 35%, color-mix(in oklab, var(--orange) 5%, transparent) 0, transparent 20rem);
+    background-image: linear-gradient(to right, color-mix(in oklab, var(--border) 35%, transparent) 1px, transparent 1px);
+    background-size: 80px 100%;
   }
   html {
     @apply font-sans;
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
     scroll-padding-top: 5rem;
   }
 }
@@ -163,13 +161,36 @@
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-    scroll-snap-type: none;
   }
 
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  .portfolio-section {
+    @apply border-b border-border bg-background/88;
+  }
+  .section-kicker {
+    @apply flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-orange;
+  }
+  .primary-action {
+    @apply inline-flex h-11 items-center gap-2 bg-foreground px-5 text-sm font-bold text-background transition hover:-translate-y-0.5 hover:bg-orange;
+  }
+  .secondary-action {
+    @apply inline-flex h-11 items-center gap-2 border border-border bg-background px-5 text-sm font-bold transition hover:border-orange hover:text-orange;
+  }
+  .social-link {
+    @apply inline-flex items-center gap-2 font-semibold text-muted-foreground transition hover:text-orange;
+  }
+  .technical-grid {
+    background-image:
+      linear-gradient(color-mix(in oklab, var(--orange) 15%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in oklab, var(--orange) 15%, transparent) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 }
 

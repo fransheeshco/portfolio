@@ -3,22 +3,19 @@ import { ProjectCard } from "./ProjectCard";
 
 export default function ProjectsSection() {
   return (
-    <section className="flex flex-col items-center bg-[linear-gradient(180deg,transparent,rgba(249,115,22,0.045),transparent)] px-6 py-20">
-      {/* Header */}
-      <h2 className="text-4xl font-black tracking-tight">
-        Selected <span className="text-orange">Projects</span>
-      </h2>
-
-      <div className="my-4 h-1 w-16 rounded-full bg-orange" />
+    <section className="portfolio-section px-5 py-14 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-7xl">
+      <p className="section-kicker">{"// Selected projects"}</p>
 
       {/* Grid */}
-      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl">
+      <div className="mt-7 grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
           <ProjectCard
             key={project.title}
             project={project}
           />
         ))}
+      </div>
       </div>
     </section>
   );
