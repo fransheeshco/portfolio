@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { Mail, Send } from "lucide-react";
+import { ArrowUpRight, Mail, Send } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function ContactSection() {
@@ -23,7 +23,8 @@ export default function ContactSection() {
 
     setLoading(true);
 
-    await toast.promise(
+    try {
+      await toast.promise(
       fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -49,55 +50,72 @@ export default function ContactSection() {
         success: "Message sent successfully.",
         error: (err) => err.message || "Something went wrong.",
       },
-    );
-
-    setLoading(false);
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
-    <section className="portfolio-section scroll-mt-20">
-      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-12">
-        <p className="section-kicker">{"// Contact me"}</p>
-        <div className="mt-7 grid gap-10 lg:grid-cols-[0.7fr_1.15fr_0.65fr] lg:gap-12">
-          <div>
-            <h2 className="text-3xl font-black leading-tight tracking-[-0.04em]">
-              Let&apos;s build something <span className="text-orange">intelligent together.</span>
-            </h2>
-            <p className="mt-4 text-sm leading-6 text-muted-foreground">
-              Open to opportunities, collaborations, and great conversations.
-            </p>
+    <section className="portfolio-section contact-section scroll-mt-20">
+      <div className="contact-invite">
+        <h2>Have an awesome project idea? <span>Let&apos;s discuss.</span></h2>
+        <p>Tell me what you&apos;re building, where it&apos;s stuck, or what you want to explore.</p>
+        <a href="mailto:francisnelson.dev@gmail.com" className="contact-email">
+          <Mail className="size-5" aria-hidden="true" />
+          francisnelson.dev@gmail.com
+          <ArrowUpRight className="size-5" aria-hidden="true" />
+        </a>
+      </div>
+
+      <div className="skills-ribbon" aria-hidden="true">
+        <div>Web development <span>•</span> AI systems <span>•</span> API design <span>•</span> Data visualization <span>•</span> Product thinking <span>•</span></div>
+      </div>
+
+      <div className="contact-footer-wrap">
+        <div className="contact-footer">
+          <div className="contact-footer-heading">
+            <h2>Let&apos;s connect there</h2>
+            <a href="mailto:francisnelson.dev@gmail.com" className="accent-action">Hire me <ArrowUpRight className="size-4" aria-hidden="true" /></a>
           </div>
 
-          <form onSubmit={handleSubmit} className="grid gap-3 sm:grid-cols-2">
-            <MinimalInput name="name" placeholder="Name" />
-            <MinimalInput name="email" type="email" placeholder="Email" />
-            <MinimalTextarea name="message" placeholder="Message" className="sm:col-span-2" />
-            <button
-              type="submit"
-              disabled={loading}
-              className={cn(
-                "primary-action justify-center sm:col-span-2",
-                "disabled:opacity-50",
-              )}
-            >
-              {loading ? "Sending..." : "Send message"}
-              <Send className="size-4" />
-            </button>
-          </form>
-
-          <div>
-            <h3 className="text-base font-black">Get in touch</h3>
-            <div className="mt-6 flex flex-col items-start gap-5">
-              <a className="social-link text-base" href="mailto:francisnelson.dev@gmail.com">
-                <Mail className="size-6 text-orange" /> Email
-              </a>
-              <a className="social-link text-base" href="https://github.com/fransheeshco" target="_blank" rel="noreferrer">
-                <FaGithub className="size-6 text-orange" /> GitHub
-              </a>
-              <a className="social-link text-base" href="https://www.linkedin.com/in/francis-nelson-cejas-b10ba73a9/" target="_blank" rel="noreferrer">
-                <FaLinkedin className="size-6 text-orange" /> LinkedIn
-              </a>
+          <div className="contact-footer-grid">
+            <div className="footer-profile">
+              <a href="#about" className="footer-brand"><span>FC</span> FRANCIS</a>
+              <p>Computer science student building practical software and exploring AI, systems, and ideas worth shipping.</p>
+              <div className="footer-socials">
+                <a href="https://github.com/fransheeshco" target="_blank" rel="noreferrer" aria-label="GitHub"><FaGithub /></a>
+                <a href="https://www.linkedin.com/in/francis-nelson-cejas-b10ba73a9/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+                <a href="mailto:francisnelson.dev@gmail.com" aria-label="Email"><Mail /></a>
+              </div>
             </div>
+
+            <nav className="footer-nav" aria-label="Footer navigation">
+              <h3>Navigation</h3>
+              <a href="#about">Home</a>
+              <a href="#tech-stack">Services</a>
+              <a href="#experience">Experience</a>
+              <a href="#projects">Projects</a>
+              <a href="#certifications">Certificates</a>
+            </nav>
+
+            <form onSubmit={handleSubmit} className="contact-form">
+              <h3>Send a message</h3>
+              <div className="contact-fields">
+                <MinimalInput name="name" placeholder="Your name" />
+                <MinimalInput name="email" type="email" placeholder="Email address" />
+                <MinimalTextarea name="message" placeholder="What would you like to build?" />
+                <button type="submit" disabled={loading} className={cn("contact-submit", "disabled:opacity-50")}>
+                  {loading ? "Sending..." : "Send message"}
+                  <Send className="size-4" aria-hidden="true" />
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div className="footer-bottom">
+            <span>© {new Date().getFullYear()} Francis Cejas</span>
+            <span>Designed and built with intention.</span>
           </div>
         </div>
       </div>
@@ -114,13 +132,12 @@ function MinimalInput({
   return (
     <input
       {...props}
+      aria-label={props["aria-label"] ?? props.placeholder}
       required
       className={cn(
-        "h-11 w-full border bg-background px-3 text-sm",
-        "border-border",
-        "outline-none transition-all duration-200",
-        "focus:border-orange",
-        "placeholder:text-muted-foreground",
+        "h-12 w-full rounded-xl border border-white/20 bg-white/8 px-4 text-sm text-white",
+        "outline-none transition duration-200 focus:border-[var(--yellow)]",
+        "placeholder:text-white/55",
         className,
       )}
     />
@@ -134,15 +151,13 @@ function MinimalTextarea({
   return (
     <textarea
       {...props}
+      aria-label={props["aria-label"] ?? props.placeholder}
       required
       rows={5}
       className={cn(
-        "w-full border bg-background",
-        "border-border",
-        "px-3 py-3 text-sm resize-none",
-        "outline-none transition-all duration-200",
-        "focus:border-orange",
-        "placeholder:text-muted-foreground",
+        "w-full resize-none rounded-xl border border-white/20 bg-white/8 px-4 py-3 text-sm text-white",
+        "outline-none transition duration-200 focus:border-[var(--yellow)]",
+        "placeholder:text-white/55",
         className,
       )}
     />

@@ -5,6 +5,7 @@ import ContactSection from "@/components/contact/ContactSection";
 import SectionTransition from "@/components/layout/SectionTransition";
 import TechStackSection from "@/components/techstack/TechStackSection";
 import CertificationsSection from "@/components/certifications/CertificationsSection";
+import WhyHireSection from "@/components/about/WhyHireSection";
 
 export default function Home() {
   return (
@@ -17,12 +18,16 @@ export default function Home() {
         <TechStackSection />
       </SectionTransition>
 
-      <SectionTransition id="projects">
-        <ProjectsSection />
-      </SectionTransition>
-
       <SectionTransition id="experience">
         <ExperienceSection />
+      </SectionTransition>
+
+      <SectionTransition>
+        <WhyHireSection />
+      </SectionTransition>
+
+      <SectionTransition id="projects">
+        <ProjectsSection />
       </SectionTransition>
 
       <SectionTransition id="certifications">

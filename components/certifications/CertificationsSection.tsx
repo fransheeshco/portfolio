@@ -3,17 +3,17 @@ import { CertificationCard } from "./CertificationCard";
 
 export default function CertificationsSection() {
   return (
-    <section className="portfolio-section px-5 py-14 sm:px-8 lg:px-12">
-      <div className="mx-auto max-w-7xl">
-      <p className="section-kicker">{"// Certificates"}</p>
-      <div className="mt-7 grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {certifications.map((certification, index) => (
-          <CertificationCard
-            key={`${certification.title}-${index}`}
-            certification={certification}
-          />
-        ))}
-      </div>
+    <section className="portfolio-section px-3 py-8 sm:px-5 lg:px-8">
+      <div className="credentials-stage mx-auto max-w-[96rem]">
+        <div className="credentials-heading">
+          <h2 className="section-heading">Credentials that support <span>the work</span></h2>
+          <p>Continued learning in practical AI systems, frameworks, and responsible collaboration.</p>
+        </div>
+        <div className="credentials-grid">
+          {certifications.map((certification, index) => (
+            <CertificationCard key={`${certification.title}-${index}`} certification={certification} />
+          ))}
+        </div>
       </div>
     </section>
   );

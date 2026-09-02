@@ -14,4 +14,9 @@ export const certifications: Certification[] = [
     certificateUrl:
       "/certifications/AI-Fluency-Framework-and-Foundations.pdf",
   },
+  {
+    title: "Claude 101",
+    issuer: "Anthropic",
+    certificateUrl: "/api/certificates/claude-101",
+  }
 ];
