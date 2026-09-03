@@ -25,7 +25,7 @@ const services = [
 
 export default function TechStackSection() {
   return (
-    <section className="portfolio-section services-section px-3 py-8 sm:px-5 lg:px-8">
+    <section className="portfolio-section services-section px-3 pb-8 sm:px-5 lg:px-8">
       <div className="services-stage mx-auto max-w-[96rem]">
         <div className="services-heading">
           <h2 className="section-heading">My <span>Services</span></h2>
