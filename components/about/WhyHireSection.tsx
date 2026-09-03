@@ -10,7 +10,7 @@ const facts = [
 
 export default function WhyHireSection() {
   return (
-    <section className="portfolio-section px-5 py-8 sm:px-8 lg:px-12 lg:py-12">
+    <section className="portfolio-section why-section px-5 py-8 sm:px-8 lg:px-12 lg:py-12">
       <div className="why-panel mx-auto max-w-7xl">
         <div className="why-portrait" aria-hidden="true">
           <div className="why-portrait-disc" />

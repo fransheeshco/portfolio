@@ -6,23 +6,16 @@ import { useEffect, useState } from "react";
 type NavItem = {
   name: string;
   href: string;
-  active?: boolean;
-  external?: boolean;
 };
 
-const leftItems: NavItem[] = [
-  { name: "Home", href: "#about", active: true },
+const navItems: NavItem[] = [
+  { name: "About", href: "#about" },
   { name: "Experience", href: "#experience" },
-  { name: "Service", href: "#tech-stack" },
-];
-
-const rightItems: NavItem[] = [
+  { name: "Services", href: "#tech-stack" },
   { name: "Certificates", href: "#certifications" },
-  { name: "Project", href: "#projects" },
+  { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
 ];
-
-const mobileItems = [...leftItems, ...rightItems];
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -39,22 +32,14 @@ export default function NavBar() {
   return (
     <header className="site-header">
       <nav className="site-nav" aria-label="Main navigation">
-        <div className="site-nav-group">
-          {leftItems.map((item) => (
-            <a key={item.name} href={item.href} className={item.active ? "site-nav-link is-active" : "site-nav-link"}>
-              {item.name}
-            </a>
-          ))}
-        </div>
-
         <a href="#about" className="site-brand" aria-label="Francis Cejas, home">
           <span>FC</span>
           <strong>FRANCIS</strong>
         </a>
 
-        <div className="site-nav-group site-nav-group-right">
-          {rightItems.map((item) => (
-            <a key={item.name} href={item.href} className="site-nav-link" {...(item.external ? { target: "_blank", rel: "noreferrer" } : {})}>
+        <div className="site-nav-group">
+          {navItems.map((item) => (
+            <a key={item.name} href={item.href} className="site-nav-link">
               {item.name}
             </a>
           ))}
@@ -67,8 +52,8 @@ export default function NavBar() {
 
       {menuOpen && (
         <div id="mobile-navigation" className="site-mobile-menu">
-          {mobileItems.map((item) => (
-            <a key={item.name} href={item.href} onClick={() => setMenuOpen(false)} {...(item.external ? { target: "_blank", rel: "noreferrer" } : {})}>
+          {navItems.map((item) => (
+            <a key={item.name} href={item.href} onClick={() => setMenuOpen(false)}>
               {item.name}
             </a>
           ))}

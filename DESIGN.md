@@ -37,12 +37,6 @@ spacing:
   control: "1.15rem"
   section: "clamp(3.5rem, 7vw, 7rem)"
 components:
-  nav-active:
-    backgroundColor: "{colors.yellow}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.pill}"
-    padding: "0 1.15rem"
-    height: "3.35rem"
   hero-primary-action:
     backgroundColor: "{colors.yellow}"
     textColor: "{colors.ink}"
@@ -79,7 +73,7 @@ The palette uses one saturated signal color against a disciplined set of ink and
 
 ### Primary
 
-- **Signal Yellow** (`#FFCC00`): The single action and emphasis color. Use for the active Home item, selected hero word, circular portrait grounds, arrows, key icons, ribbon surface, primary actions, and focus/selection feedback.
+- **Signal Yellow** (`#FFCC00`): The single action and emphasis color. Use for the selected hero word, circular portrait grounds, arrows, key icons, ribbon surface, primary actions, and focus/selection feedback.
 
 ### Neutral
 
@@ -110,13 +104,13 @@ The palette uses one saturated signal color against a disciplined set of ink and
 
 ## Layout
 
-The page is a continuous, anchored portfolio: About, Services, Experience, Why Hire, Projects, Certificates, and Contact. Navigation is absolute over the hero rather than fixed to the viewport, while `html` keeps a 6rem smooth-scroll offset for anchored content.
+The page is a continuous, anchored portfolio: About, Services, Experience, Why Hire, Projects, Certificates, and Contact. Navigation is a fixed liquid-glass pill that follows the visitor through the page, while `html` keeps a 6rem smooth-scroll offset for anchored content. Browser scrollbars retain their platform-default styling; no custom yellow scrollbar is part of the shipped system.
 
 Desktop uses two primary content widths: `min(96rem, 100%)` for the hero, service stage, credentials stage, and footer; `max-w-7xl` for the timeline, Why Hire panel, and projects. Standard white sections use generous `py-20` to `py-28` rhythm; dark stages use `clamp(3.5rem, 7vw, 7rem)` internal padding.
 
-The hero occupies exactly `100svh` with a 42rem minimum. Its title, yellow circle, portrait, and action capsule are layered on a centered absolute canvas—not reflowed as a conventional grid. The title remains behind the centered portrait; a smaller yellow circle rises from beneath the cutout, and the action capsule is centered at the bottom. The hero title uses short viewport overrides—`clamp(2.8rem, 4.8vw, 4.3rem)` on short desktops and `clamp(2.25rem, 10vw, 3.45rem)` below 768px. The circle is 42rem with a `-13rem` bottom offset on standard desktop, 34rem / `-10rem` on short desktops, 36rem / `-11rem` below 1024px, and 25rem / `-7rem` below 768px. The portrait follows lower negative offsets: `-2.5rem` at standard desktop, then `-2rem` at every breakpoint override.
+The hero occupies exactly `100svh` with a 42rem minimum on larger screens. Its title, yellow circle, portrait, and action capsule are layered on a centered absolute canvas—not reflowed as a conventional grid. The title remains behind the centered portrait; a smaller yellow circle rises from beneath the cutout, and the action capsule is centered at the bottom. The hero title uses short viewport overrides—`clamp(2.8rem, 4.8vw, 4.3rem)` on short desktops and `clamp(2.25rem, 10vw, 3.45rem)` below 768px. Standard desktop uses a 42rem circle at `-15rem` and the portrait at `-4.5rem`; short desktops use a 34rem circle at `-12.5rem` and the portrait at `-4.5rem`. These lower placements add another 16px of title-to-portrait/circle separation. Tablet and mobile keep the 36rem / `-11rem` and 25rem / `-2rem` circle treatments respectively; the portrait is `-2rem` through the tablet breakpoints and `0` below 768px.
 
-At widths below 1024px, the full navigation collapses to the brand and a menu control; the hero circle and portrait scale down, services become horizontal image/copy cards, credentials stack as image-over-copy cards, and the contact footer form moves below the profile/navigation columns. At widths below 768px, the hero preserves its 42rem minimum composition while services become fully stacked cards, the timeline becomes a left-rail list, Why Hire stacks, projects become one column, and the footer becomes a single vertical flow. At 480px and below, the wordmark and multi-column form/fact arrangements simplify further.
+At widths below 1024px, the full navigation collapses to the brand and a menu control; the hero circle and portrait scale down, services become horizontal image/copy cards, credentials stack as image-over-copy cards, and the contact footer form moves below the profile/navigation columns. At widths below 768px, the hero becomes a 46rem-tall composition, with a tightened title-to-portrait gap and a direct transition into Services. The major visual panels use the full usable viewport width: Services, Why Hire, Projects, Credentials, and the footer lose their outer horizontal inset and their stages/cards/images lose rounded outer edges. Headings and explanatory copy retain deliberate 1–1.25rem internal insets. Services stack, the timeline becomes a left-rail list, Why Hire stacks, projects become one column, and the footer becomes a single vertical flow. At 480px and below, the wordmark and multi-column form/fact arrangements simplify further.
 
 ## Elevation & Depth
 
@@ -124,7 +118,7 @@ Depth is structural and restrained. The page relies primarily on dark/light stag
 
 ### Shadow Vocabulary
 
-- **Navigation liquid glass** (`0 18px 44px rgba(37,40,43,.2), inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 0 rgba(255,255,255,.08)`): Gives the absolute dark pill ambient lift plus top and bottom internal highlights.
+- **Navigation liquid glass** (`0 18px 44px rgba(37,40,43,.18), inset 0 1px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(255,255,255,.08)`): Gives the fixed dark pill ambient lift plus top and bottom internal highlights.
 - **Hero portrait** (`drop-shadow(0 25px 25px rgba(37,40,43,.18))`): Grounds the transparent cutout against the yellow circle.
 - **Hero action capsule** (`0 14px 34px rgba(37,40,43,.24)`): Supports the floating control above the portrait.
 - **Image/card lift** (`0 16px 34px rgba(37,40,43,.12)`): Used for project imagery; service cards use movement rather than a default heavy shadow.
@@ -136,17 +130,17 @@ Depth is structural and restrained. The page relies primarily on dark/light stag
 
 The system mixes three controlled shapes: full pills for navigation and direct actions, 1rem cards for content modules, and 2rem dark stage containers for major content worlds. The recurring circle is a signature portrait/action device: brand marks, icon actions, timeline markers, service/project arrows, and the hero/Why Hire discs all echo it. The hero name stays unboxed as plain colored text inside the headline.
 
-Borders are quiet but intentional: muted ink-gray around light fields, translucent white around dark-stage cards, a strong semi-opaque white edge around the hero action capsule, and white liquid-glass edges/highlights in the desktop nav and mobile menu. Project tags and actions use capsules; imagery is clipped inside 1rem rounded rectangles unless it is a transparent portrait cutout.
+Borders are quiet but intentional: muted ink-gray around light fields, translucent white around dark-stage cards, a strong semi-opaque white edge around the hero action capsule, and white liquid-glass edges/highlights in the desktop nav and mobile menu. Project tags and actions use capsules; imagery is clipped inside 1rem rounded rectangles unless it is a transparent portrait cutout. Below 768px, the primary content stages, their cards, and project imagery intentionally become square-edged and edge-to-edge; only their internal copy keeps horizontal breathing room.
 
 ## Components
 
 ### Navigation
 
-**A large dark liquid-glass route capsule centered over the hero.** The absolute `.site-header` holds a 5.5rem minimum-height, `999px` pill with 74% opaque ink, a 52%-opaque white edge, `blur(22px) saturate(145%)`, and inset top/bottom white highlights. Desktop uses a three-column grid: Home, Experience, Service on the left; the yellow glass `FC` roundel and `FRANCIS` wordmark in the center; Certificates, Project, Contact on the right.
+**A large fixed dark liquid-glass route capsule.** The `.site-header` remains 1.1rem from the top as the visitor scrolls and passes pointer events through its outer frame; the pill itself receives interaction. It is 5.5rem minimum-height, `999px`, and uses an ink gradient from 76% to 58% opacity, a 44%-opaque white edge, `blur(24px) saturate(155%)`, plus inset top/bottom white highlights.
 
-- **Active / default:** Home is the only default active route, a minimum-8.8rem yellow pill with bold ink text. Other links are semibold white at 82% opacity.
-- **Hover / focus:** Links lift 1px and receive a subtle translucent-white background on hover; global focus is a 2px yellow outline offset by 4px.
-- **Mobile:** Link groups are replaced below 1024px by a round outlined menu control. Its menu exposes all routes in an ink panel; Escape closes it, `aria-expanded` and `aria-controls` communicate state, and choosing a route closes it.
+- **Desktop structure:** The yellow glass `FC` roundel and `FRANCIS` wordmark occupy the left home control. The centered link group contains About, Experience, Services, Certificates, Projects, and Contact. There is no standalone Home route and no default yellow active-link pill.
+- **Hover / focus:** All desktop links are semibold white at 82% opacity. They lift 1px and receive a subtle translucent-white background on hover; global focus is a 2px yellow outline offset by 4px.
+- **Mobile:** The desktop link group is replaced below 1024px by the left brand/home control and a round outlined menu button. Its menu exposes the six section links in an ink liquid-glass panel; Escape closes it, `aria-expanded` and `aria-controls` communicate state, and choosing a route closes it.
 
 ### Hero
 
@@ -158,11 +152,11 @@ Borders are quiet but intentional: muted ink-gray around light fields, transluce
 
 ### Service cards
 
-**Image-led skill proof inside a dark rounded stage.** Three services live in `.services-stage`: Web development, Backend & systems, and AI & data. At desktop they form a three-column grid; each card has dark explanatory copy above a real project interface preview.
+**Image-led skill proof inside a dark rounded stage.** Three services live in `.services-stage`: Web development, Backend & systems, and AI & data. At desktop they form a three-column grid; each card has dark explanatory copy above a real project interface preview. The stage's yellow circle is a lower-right background accent on larger screens.
 
 - **Shape / surface:** 1rem rounded container with a 1px translucent-white rim; dark `rgba(37,40,43,.82)` copy surface and a 16:10 preview.
 - **Interaction:** The card lifts 7px on hover. A circular ink arrow at its lower-right rotates/scales and becomes yellow on hover.
-- **Responsive:** Between 768px and 1023px, each service becomes a side-by-side image/copy row; below 768px it stacks vertically.
+- **Responsive:** Between 768px and 1023px, each service becomes a side-by-side image/copy row. Below 768px, the full-width stage becomes square-edged, headings stay inset, and services stack as edge-to-edge cards. The yellow circle moves to the top-right of the first service-card area, behind the content at partial opacity.
 
 ### Experience timeline
 
@@ -176,7 +170,7 @@ Borders are quiet but intentional: muted ink-gray around light fields, transluce
 
 - **Evidence:** The live metrics are 3 Featured projects, 2 Engineering internships, and 2 AI certificates.
 - **Actions:** An outlined pill starts a conversation; an underlined text link opens the resume in a new tab.
-- **Responsive:** The portrait and copy stack below 768px; metrics become two columns, then one below 480px.
+- **Responsive:** The full-width panel becomes square-edged at mobile, while portrait/copy stack and the copy keeps its internal inset. Metrics become two columns, then one below 480px.
 
 ### Project cards
 
@@ -184,19 +178,19 @@ Borders are quiet but intentional: muted ink-gray around light fields, transluce
 
 - **Hover / keyboard focus:** The dark overlay slides from `translateY(calc(100% - 5.5rem))` to fill the complete image. It reveals the project description and technology chips, while the screenshot scales to `1.045` and desaturates to `.72`; the yellow arrow rotates 8 degrees. `:focus-visible` triggers exactly the same reveal as hover.
 - **Touch treatment:** Under `@media (hover: none)`, the full overlay is always revealed, the screenshot is already desaturated, and the image becomes a minimum 22rem tall rather than relying on hover to expose essential project information.
-- **Responsive:** The project grid becomes one column below 768px; the final project returns to full width.
+- **Responsive:** The project showcase becomes edge-to-edge below 768px, while its heading remains inset. The grid becomes one column, every image is square-edged/full usable width, and the final project returns to full width.
 
 ### Credentials
 
 **A dark evidence stage for certifications.** Credentials use a two-column grid on the dark stage. Each card combines a real certificate image (or yellow verified-learning fallback) with issuer, title, optional date, and a yellow circular outbound arrow.
 
-- **Responsive:** Cards stack image over copy below 1024px, become compact image/copy rows again below 768px, and stack fully below 480px.
+- **Responsive:** Cards stack image over copy below 1024px. Below 768px, the dark credentials stage and cards are edge-to-edge/square-edged with heading/copy inset; cards become compact image/copy rows again, then stack fully below 480px.
 
 ### Contact and footer
 
 **A white invitation that resolves into a dark working footer.** The contact CTA centers an oversized question, muted supporting text, and a shadowed email pill. A slightly rotated yellow skills ribbon divides it from the ink footer.
 
-- **Footer:** A 2rem-rounded ink container holds the hire action, personal profile/social links, anchor navigation, and the functional contact form.
+- **Footer:** A 2rem-rounded ink container holds the hire action, personal profile/social links, anchor navigation, and the functional contact form. Below 768px, it becomes a square-edged, full-usable-width footer while its internal content retains padding.
 - **Fields:** 3rem-high translucent-white inputs with white text, rounded-xl corners, and yellow focus borders; textarea spans both columns on larger layouts.
 - **Submit:** A rounded `.75rem` yellow button with ink text. Its disabled state is visibly reduced in opacity while the request is in flight.
 
@@ -206,17 +200,18 @@ Borders are quiet but intentional: muted ink-gray around light fields, transluce
 
 - **Do** use Manrope throughout the active UI and retain tight, balanced large-heading typesetting.
 - **Do** preserve `#FFCC00`, `#25282B`, `#F9FAFF`, `#9A9FA8`, and `#FFFFFF` as the only core palette.
-- **Do** use yellow to show active navigation, direct action, and circular portrait grounds.
+- **Do** use yellow for direct action, the selected hero word, and circular portrait grounds; navigation routes remain neutral until interaction.
 - **Do** retain the hero's `100svh` central cutout-portrait composition, with plain yellow Francis text behind the portrait and a responsive smaller yellow circle beneath it.
 - **Do** use the exact translucent-white edge, inset highlights, blur, and saturation treatment for the dark liquid-glass navigation and mobile menu.
 - **Do** make the services, credentials, and footer their own dark rounded stages, with real project/certificate imagery doing visual work.
+- **Do** let the hero flow directly into Services on mobile, and use edge-to-edge, square-edged stages/cards/images below 768px while retaining internal text insets.
 - **Do** make each project card a complete GitHub link and preserve its at-rest dark title rail, hover/focus full overlay, and always-revealed touch treatment.
 - **Do** preserve factual signals: the 3 / 2 / 2 Why Hire metrics.
 - **Do** maintain smooth scrolling, keyboard focus visibility, semantic image alt text, menu state attributes, and reduced-motion behavior.
 
 ### Don't:
 
-- **Don't** replace the dark pill nav with a generic top bar, tabs, or a fixed header; its absolute placement is part of the hero composition.
+- **Don't** replace the fixed dark glass pill with a generic top bar, tabs, an absolute hero-only header, or a yellow active Home pill.
 - **Don't** use yellow as a generic surface color across cards or sections; preserve it as the system's limited signal color.
 - **Don't** put the transparent portrait into a boxed or rounded image frame; it must remain a cutout over the yellow circular ground.
 - **Don't** hide project description or technology chips behind hover-only behavior on touch devices.

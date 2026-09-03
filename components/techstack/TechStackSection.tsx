@@ -1,23 +1,23 @@
 import { projects } from "@/components/projects/ProjectData";
-import { ArrowUpRight, Bot, Database, PanelsTopLeft } from "lucide-react";
+import { ArrowUpRight, Bot, Code2, PenTool } from "lucide-react";
 import Image from "next/image";
 
 const services = [
   {
-    title: "Web development",
-    description: "Responsive products built with React, Next.js, TypeScript, and modern CSS.",
-    icon: PanelsTopLeft,
+    title: "UI/UX Design",
+    description: "Responsive interfaces, wireframes, prototypes, and design systems shaped around clear user journeys.",
+    icon: PenTool,
     project: projects[2],
   },
   {
-    title: "Backend & systems",
-    description: "Reliable APIs and data flows using Python, Flask, Node.js, and PostgreSQL.",
-    icon: Database,
+    title: "Full-Stack Software Development",
+    description: "Web applications, dashboards, APIs, databases, authentication, and complete frontend-to-backend integration.",
+    icon: Code2,
     project: projects[0],
   },
   {
-    title: "AI & data",
-    description: "Practical AI exploration, database design, and clear data visualization.",
+    title: "AI Integration & Automation",
+    description: "AI-powered product features, API integrations, intelligent workflows, and practical process automation.",
     icon: Bot,
     project: projects[1],
   },
@@ -25,11 +25,11 @@ const services = [
 
 export default function TechStackSection() {
   return (
-    <section className="portfolio-section px-3 py-8 sm:px-5 lg:px-8">
+    <section className="portfolio-section services-section px-3 py-8 sm:px-5 lg:px-8">
       <div className="services-stage mx-auto max-w-[96rem]">
         <div className="services-heading">
           <h2 className="section-heading">My <span>Services</span></h2>
-          <p>Full-stack thinking for products that need a clear interface and a dependable foundation.</p>
+          <p>From product design to production software and AI-enabled workflows, I help turn ideas into useful digital experiences.</p>
         </div>
 
         <div className="services-grid">
