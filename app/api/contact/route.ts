@@ -35,13 +35,15 @@ export async function POST(req: Request) {
       message: "Email sent successfully",
       data,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("API crash:", err);
+
+    const message = err instanceof Error ? err.message : "Internal server error";
 
     return Response.json(
       {
         success: false,
-        message: err?.message || "Internal server error",
+        message,
       },
       { status: 500 }
     );
