@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 :root {
   --canvas: #09090b; --surface: #111114; --surface-2: #18181b; --line: #27272a;
