@@ -3,8 +3,9 @@
 import { Activity, ArrowUpRight, Minus, Plus, X } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
-export type SystemProject = { id: string; title: string; tagline: string; category: string; metric: string; metricLabel: string; stack: string[]; summary: string; bottleneck: string; solution: string; tradeoffs: string; flow: string[]; capacity: number; group: "backend" | "fullstack" | "data"; timeframe: string; stats: { label: string; value: string }[]; featured?: boolean; href?: string };
+export type SystemProject = { id: string; title: string; tagline: string; category: string; metric: string; metricLabel: string; stack: string[]; summary: string; bottleneck: string; solution: string; tradeoffs: string; flow: string[]; capacity: number; group: "backend" | "fullstack" | "data"; timeframe: string; stats: { label: string; value: string }[]; featured?: boolean; href?: string; image?: string };
 
 function CapacityModel({ project }: { project: SystemProject }) {
   const [load, setLoad] = useState(project.capacity + 3);
@@ -38,11 +39,9 @@ export function ProjectBento({ projects }: { projects: SystemProject[] }) {
     <div className="project-grid">
       {visibleProjects.map((project) => <article className={`project-card ${project.featured ? "featured" : "compact"}`} key={project.id}>
         <button type="button" className="project-open" onClick={() => setActive(project)} aria-label={`Open ${project.title} architecture details`} />
-        <div className="project-top"><span>{project.category} · {project.timeframe}</span><span>Inspect <ArrowUpRight size={15} /></span></div>
-        <div className="project-schematic" aria-hidden="true"><div className="schematic-track">{project.flow.slice(0, 4).map((node, index) => <span key={node}><b>{node}</b>{index < 3 && <i />}</span>)}</div><div className="schematic-signal" /></div>
-        <div className="project-copy"><h3>{project.title}</h3><p>{project.tagline}</p></div>
-        <div className="project-stats">{project.stats.map((stat) => <div key={stat.label}><span>{stat.label}</span><strong>{stat.value}</strong></div>)}</div>
-        <div className="project-foot"><p>{project.stack.join(" · ")}</p><span>Architecture & demo <ArrowUpRight size={14} /></span></div>
+        {project.image && <div className="project-media"><Image src={project.image} alt="" fill sizes="(max-width: 640px) 100vw, 360px" /></div>}
+        <div className="project-copy"><div className="project-title-row"><h3>{project.title}</h3><span>{project.timeframe}</span></div><p>{project.tagline}</p><div className="project-tags">{project.stack.map((item) => <span key={item}>{item}</span>)}</div></div>
+        <div className="project-foot"><span>Deep dive</span><ArrowUpRight size={14} /></div>
       </article>)}
     </div>
     {active && <div className="modal-backdrop" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setActive(null)}>
