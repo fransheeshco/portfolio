@@ -4,9 +4,9 @@ import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Francis Cejas | Full-Stack & Backend Systems Engineer",
+  title: "Francis Cejas | Full-Stack Software Engineer",
   description:
-    "Systems portfolio of Francis Cejas, a full-stack and backend engineer building dependable APIs, data workflows, and cloud products.",
+    "Portfolio of Francis Cejas, a full-stack software engineer building dependable serverless systems, data workflows, and web products.",
 };
 
 

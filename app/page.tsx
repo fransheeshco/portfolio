@@ -10,19 +10,15 @@ import type { IconType } from "react-icons";
 import { FaAws } from "react-icons/fa6";
 import {
   SiDocker,
-  SiExpo,
   SiExpress,
   SiFlask,
   SiGit,
   SiNextdotjs,
   SiNodedotjs,
-  SiOpenapiinitiative,
   SiPostgresql,
   SiPython,
   SiReact,
-  SiRender,
   SiSupabase,
-  SiTailwindcss,
   SiTypescript,
   SiVercel,
 } from "react-icons/si";
@@ -40,42 +36,47 @@ const projects: SystemProject[] = [
   {
     id: "lob-side",
     title: "Lob Side Booking",
-    tagline: "A concurrency-safe court booking and payment platform.",
+    tagline: "A transaction-safe court booking and payment platform.",
     category: "Full-stack platform",
-    metric: "177 tests",
-    metricLabel: "booking, payment & infrastructure checks",
-    stack: ["Next.js", "TypeScript", "AWS", "DynamoDB", "PayMongo"],
-    summary: "A serverless booking system that protects inventory while customers select dynamic one-hour slots and complete online payment.",
-    bottleneck: "Concurrent requests could claim the same court slot while delayed or duplicated payment events created inconsistent booking state.",
-    solution: "Atomic DynamoDB slot transactions, 10-minute payment holds, signed webhook verification, idempotent event handling, and server-side payment confirmation.",
-    tradeoffs: "DynamoDB favors predictable, low-latency access and atomic conditional writes, but requires access patterns to be designed up front. Nine focused Lambda functions keep deployment boundaries small at the cost of more distributed tracing.",
-    flow: ["Customer", "API Gateway", "9 Lambdas", "DynamoDB", "PayMongo"],
-    capacity: 9,
+    metric: "21 APIs",
+    metricLabel: "booking and payment operations",
+    stack: ["Next.js", "TypeScript", "AWS", "DynamoDB", "GCash"],
+    summary: "A serverless booking system that protects court inventory while customers choose one-hour slots and complete a manual GCash payment workflow.",
+    bottleneck: "Concurrent requests could claim the same court slot while delayed or duplicated payment events created inconsistent booking, payment, and slot state.",
+    solution: "Conditional DynamoDB transactions, idempotency keys, optimistic concurrency control, 10-minute checkout holds, and SHA-256 proof deduplication keep the workflow consistent.",
+    tradeoffs: "DynamoDB provides low-latency conditional writes and atomic reservations, but access patterns must be designed up front. Ten focused Lambda functions keep deployment boundaries small at the cost of more distributed tracing.",
+    flow: ["Customer", "API Gateway", "10 Lambdas", "DynamoDB", "GCash"],
     featured: true,
     group: "fullstack",
-    timeframe: "Sep 2026 — Present",
-    stats: [{ label: "Functions", value: "9" }, { label: "Tests", value: "177" }, { label: "Payment hold", value: "10 min" }],
-    image: "/generated-systems-workbench.png",
+    timeframe: "Oct — Nov 2026",
+    stats: [{ label: "API operations", value: "21" }, { label: "Functions", value: "10" }, { label: "Payment hold", value: "10 min" }],
+    image: "/lobside.png",
   },
   {
-    id: "urban-canopy",
-    title: "UrbanCanopy AI",
-    tagline: "Geospatial evidence turned into neighborhood-level action.",
-    category: "AI & data systems",
-    metric: "2,081",
-    metricLabel: "NYC census tracts ranked",
-    stack: ["Python", "React", "Earth Engine", "Gemini", "Supabase", "RAG"],
-    summary: "A decision-support platform that combines heat, vegetation, population, and socioeconomic signals with grounded planning guidance.",
-    bottleneck: "Environmental indicators live at different scales and formats, while generated recommendations need to remain grounded in official policy sources.",
-    solution: "A Python scoring pipeline normalizes geospatial indicators; REST endpoints serve tract results; Supabase vector search retrieves planning context before Gemini generates recommendations.",
-    tradeoffs: "A weighted score is explainable and fast to query, but exposes assumptions that must be calibrated. Retrieval adds latency, but gives each recommendation an auditable source trail.",
-    flow: ["React map", "REST API", "Scoring pipeline", "Vector search", "Gemini"],
-    capacity: 12,
+    id: "rhythm-chart-system",
+    title: "Rhythm-aware Chart System",
+    tagline: "Transformer-ready audio analysis for rhythm-game chart generation.",
+    category: "AI & audio systems",
+    metric: "4× data",
+    metricLabel: "training-set expansion",
+    stack: ["Python", "PyTorch", "Torchaudio", "Gradio", "FFmpeg"],
+    summary: "An audio-analysis and chart-rendering system that prepares rhythm-game data for model training and makes progressive predictions inspectable.",
+    bottleneck: "Audio from different sources needed a consistent, model-ready representation while generated charts required a practical way to preview difficulty and timing quality.",
+    solution: "A PyTorch and Torchaudio pipeline decodes audio, converts it to mono, resamples at 44.1 kHz, and extracts multi-resolution log-Mel features at 100 frames per second; a Gradio interface handles uploads, difficulty controls, and progressive previews.",
+    tradeoffs: "Multi-resolution features preserve more rhythmic context but increase preprocessing and training cost. Data augmentation improves diversity while requiring careful checks that musical timing remains plausible.",
+    flow: ["Audio upload", "FFmpeg", "Torchaudio", "Log-Mel features", "Gradio preview"],
     featured: true,
     group: "data",
-    timeframe: "Jul 2026",
-    stats: [{ label: "Census tracts", value: "2,081" }, { label: "Coverage", value: "5 boroughs" }, { label: "Guidance", value: "RAG" }],
-    image: "/MCS-Final.png",
+    timeframe: "Selected project",
+    stats: [
+      { label: "Validation onset F1", value: "74.88%" },
+      { label: "Validation action F1", value: "85.57%" },
+      { label: "Exact accuracy", value: "38.91%" },
+      { label: "Parameters", value: "4.95M" },
+      { label: "Songs", value: "399" },
+      { label: "Original charts", value: "1,126" },
+    ],
+    image: "/tracers.png",
   },
   {
     id: "class-records",
@@ -90,7 +91,6 @@ const projects: SystemProject[] = [
     solution: "A normalized PostgreSQL model, authenticated Flask endpoints, and event-triggered email delivery keep access and data ownership explicit.",
     tradeoffs: "A relational model adds migration discipline, but makes section, assessment, and grade constraints enforceable and reporting straightforward.",
     flow: ["Professor", "React", "Flask API", "PostgreSQL", "Resend"],
-    capacity: 7,
     group: "backend",
     timeframe: "Nov — Dec 2025",
     stats: [{ label: "Access", value: "OAuth" }, { label: "Data", value: "PostgreSQL" }, { label: "Delivery", value: "Resend" }],
@@ -110,7 +110,6 @@ const projects: SystemProject[] = [
     solution: "Express APIs own transaction validation and persistence; PostgreSQL provides the source of truth; React derives charts from returned ledger data.",
     tradeoffs: "Server-owned validation adds a request boundary, but prevents the UI from becoming a second, inconsistent source of financial rules.",
     flow: ["User", "React", "Express API", "PostgreSQL", "Charts"],
-    capacity: 6,
     group: "fullstack",
     timeframe: "Jan — Apr 2025",
     stats: [{ label: "API", value: "REST" }, { label: "Storage", value: "PostgreSQL" }, { label: "Reporting", value: "Charts" }],
@@ -121,27 +120,27 @@ const projects: SystemProject[] = [
 
 const experience = [
   {
-    role: "Full-Stack Developer",
-    company: "Lob Side Booking System",
-    period: "Sep 2026 — Present",
-    location: "Philippines",
+    role: "Full-Stack Software Engineer",
+    company: "Lobside Pickleball Court Booking System",
+    period: "Oct 2026 — Nov 2026",
+    location: "Remote",
     bullets: [
-      "Built real-time court availability, dynamic one-hour pricing, online checkout, and booking verification.",
-      "Engineered 9 ARM64 Lambda functions with atomic slot transactions to prevent concurrent double bookings.",
-      "Validated booking, payments, authentication, and infrastructure behavior with 177 automated tests.",
+      "Engineered a transaction-safe serverless booking platform spanning 21 API operations and 10 AWS Lambda functions, with idempotency keys and optimistic concurrency control.",
+      "Designed an atomic manual-GCash verification workflow that keeps booking, payment, slot ownership, revenue totals, audit history, and notifications in one DynamoDB transaction.",
+      "Prevented double bookings with conditional DynamoDB transactions, 10-minute checkout holds, automatic expiry, and SHA-256 proof deduplication.",
     ],
-    stack: "Next.js / TypeScript / AWS / DynamoDB / PayMongo",
+    stack: "Next.js / TypeScript / AWS Lambda / API Gateway / DynamoDB / CloudWatch",
     logo: "/company-logos/lob-side.jpg",
   },
   {
     role: "Software Engineering Intern",
     company: "Mata Technologies",
-    period: "Jun 2026 — Jul 2026",
+    period: "Jun 2026 — Aug 2026",
     location: "Cebu, Philippines",
     bullets: [
-      "Built a schema-aware WordPress-to-Webflow migration pipeline with duplicate detection, retries, and checkpoint recovery.",
-      "Grouped 433 gallery records into 238 verified photo sets and prepared 498 images with source metadata.",
-      "Delivered React Native profile, media-picker, localization, and provider-mode flows for Expedify.",
+      "Built a schema-aware WordPress-to-Webflow migration pipeline with field mapping and Webflow API integration for relational CMS collections.",
+      "Built a Python pipeline that grouped 433 gallery-photo records into 238 photo sets and generated verification reports for the resulting mappings.",
+      "Integrated backend APIs with reusable forms and keyboard-responsive layouts, and replaced hard-coded geographic and language options with standardized data packages.",
     ],
     stack: "Python / TypeScript / React Native / Expo / Webflow API",
     logo: "/company-logos/mata-technologies.jpeg",
@@ -155,21 +154,17 @@ const skills: Skill[] = [
   { name: "Flask", context: "REST APIs and application backends", icon: SiFlask },
   { name: "Node.js", context: "Server-side JavaScript services", icon: SiNodedotjs },
   { name: "Express", context: "REST APIs and transaction workflows", icon: SiExpress },
-  { name: "OpenAPI", context: "API contracts and documentation", icon: SiOpenapiinitiative },
   { name: "PostgreSQL", context: "Relational modeling and reporting", icon: SiPostgresql },
   { name: "DynamoDB", context: "Atomic serverless data access", icon: FaAws },
   { name: "Supabase", context: "Hosted data and vector search", icon: SiSupabase },
   { name: "React", context: "Responsive product interfaces", icon: SiReact },
   { name: "Next.js", context: "Full-stack React applications", icon: SiNextdotjs },
-  { name: "React Native", context: "Cross-platform mobile interfaces", icon: SiReact },
-  { name: "Expo", context: "React Native application delivery", icon: SiExpo },
   { name: "TypeScript", context: "Typed application development", icon: SiTypescript },
-  { name: "Tailwind CSS", context: "Maintainable interface styling", icon: SiTailwindcss },
-  { name: "AWS", context: "Lambda, API Gateway, S3 and CloudFront", icon: FaAws },
+  { name: "JavaScript", context: "Full-stack application development", icon: SiNodedotjs },
+  { name: "AWS", context: "Lambda, API Gateway and CloudWatch", icon: FaAws },
   { name: "Docker", context: "Repeatable development environments", icon: SiDocker },
   { name: "Git", context: "Version control and collaborative delivery", icon: SiGit },
   { name: "Vercel", context: "Next.js deployment and operations", icon: SiVercel },
-  { name: "Render", context: "Web service deployment", icon: SiRender },
 ];
 
 const recognitions: Recognition[] = [
@@ -181,25 +176,11 @@ const recognitions: Recognition[] = [
     description: "Recognized for turning quantum-computing concepts into an accessible and engaging analogy during the XQubit 2026 lecture series.",
   },
   {
-    title: "Programming Competition 2025 — Top Position",
+    title: "School Programming Competition 2025 — Winner",
     organizer: "College of Computer Studies",
-    date: "2025",
-    kind: "Recognition",
-    description: "Achieved one of the top positions through strong competitive-programming, problem-solving, and coding performance.",
-  },
-  {
-    title: "We.eekHack 2024",
-    organizer: "College of Computer Studies, Mindanao State University",
-    date: "November 23, 2024",
-    kind: "Hackathon",
-    description: "Participated in a competitive programming event organized by the College of Computer Studies.",
-  },
-  {
-    title: "Web Development for Web Developers",
-    organizer: "DICT ICT Literacy and Competency Development Bureau",
-    date: "November 6–10, 2023",
-    kind: "Training",
-    description: "Completed 40 hours of hands-on web development training at the DICT DTC Iligan Office.",
+    date: "March 2025",
+    kind: "Award",
+    description: "Won the school programming competition through strong problem-solving and competitive-programming performance.",
   },
 ];
 
@@ -210,7 +191,7 @@ export default function Home() {
       <MagicBlurFade delay={.04}><section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy">
           <h1 id="hero-title">Hi, I&apos;m Francis</h1>
-          <p className="hero-deck">Full-stack and backend systems engineer building dependable APIs, data workflows, and useful web products in Iligan, Philippines.</p>
+          <p className="hero-deck">Full-stack software engineer building dependable serverless systems, data workflows, and useful web products in Iligan, Philippines.</p>
         </div>
         <div className="portrait-wrap">
           <Image src={portrait} alt="Francis Cejas" fill priority sizes="(max-width: 640px) 112px, 132px" />
@@ -219,7 +200,7 @@ export default function Home() {
 
       <MagicBlurFade delay={.12}><section className="content-section about-section" aria-labelledby="about-title">
         <h2 id="about-title">About</h2>
-        <p>Computer Science undergraduate building production-minded software across backend, cloud, data, and interface layers. I care about clear system boundaries, recovery paths, and products that stay understandable under real use.</p>
+        <p>Computer Science undergraduate with hands-on experience across serverless booking systems, data migration pipelines, and responsive web products. I care about transaction safety, clear system boundaries, and software that stays understandable under real use.</p>
         <div className="profile-actions"><a href="#projects">View projects</a><EmailCopyButton email="francisn.cejas@gmail.com" /><ResumeDialog triggerClassName="button-secondary" triggerLabel="Résumé" /></div>
       </section></MagicBlurFade>
 
@@ -230,7 +211,7 @@ export default function Home() {
 
       <MagicBlurFade delay={.24}><section className="content-section education-section" aria-labelledby="education-title">
         <h2 id="education-title">Education</h2>
-        <article className="education-row"><div className="experience-mark" aria-hidden="true">M</div><div><div className="experience-title-row"><div><h3>Mindanao State University–Iligan Institute of Technology</h3><p>Bachelor of Science in Computer Science</p></div><span>2023 — 2027</span></div></div></article>
+        <article className="education-row"><div className="experience-mark company-logo"><Image src="/company-logos/msuiit.png" alt="" width={300} height={305} /></div><div><div className="experience-title-row"><div><h3>Mindanao State University–Iligan Institute of Technology</h3><p>Bachelor of Science in Computer Science · GPA 1.56 (1.00 highest)</p></div><span>Expected Jul 2027</span></div></div></article>
       </section></MagicBlurFade>
 
       <MagicBlurFade delay={.3}><section className="content-section" id="stack" aria-labelledby="stack-title">
@@ -240,13 +221,13 @@ export default function Home() {
 
       <MagicBlurFade delay={.36}><section className="content-section projects-section" id="projects" aria-labelledby="systems-title">
         <div className="section-rule-title"><i /><span>My projects</span><i /></div>
-        <div className="centered-heading"><h2 id="systems-title">Check out my latest work</h2><p>Full-stack systems built around reliable state, clear data models, and practical product needs. Open a project for its architecture, trade-offs, and live capacity model.</p></div>
+        <div className="centered-heading"><h2 id="systems-title">Check out my latest work</h2><p>Full-stack and AI systems built around reliable state, clear data models, and practical product needs. Open a project for its architecture, results, and engineering trade-offs.</p></div>
         <ProjectBento projects={projects} />
       </section></MagicBlurFade>
 
       <MagicBlurFade delay={.42}><section className="content-section awards-section" id="awards" aria-labelledby="awards-title">
         <div className="section-rule-title"><i /><span>Hackathons &amp; awards</span><i /></div>
-        <div className="centered-heading"><h2 id="awards-title">Milestones worth keeping</h2><p>Competitive programming, technical training, and recognition for making complex ideas easier to understand.</p></div>
+        <div className="centered-heading"><h2 id="awards-title">Milestones worth keeping</h2><p>Recognition for competitive programming and for making complex technical ideas easier to understand.</p></div>
         <AwardsSection recognitions={recognitions} />
       </section></MagicBlurFade>
 

@@ -3,6 +3,7 @@
 A modern, responsive portfolio website built with **Next.js** to showcase developer projects, skills, and experience.
 
 ## Live Demo
+
 Check out the live site here: [frances-portfolio-woad.vercel.app](https://frances-portfolio-woad.vercel.app)
 
 ---
@@ -29,21 +30,24 @@ Check out the live site here: [frances-portfolio-woad.vercel.app](https://france
 ## Getting Started
 
 ### 1. Prerequisites
+
 Ensure you have [Node.js](https://nodejs.org/) installed. This project uses **pnpm** as the package manager.
 
 ### 2. Clone the Repository
+
 ```bash
 git clone https://github.com/fransheeshco/portfolio
 cd portfolio
 ```
 
-
 ### 3. Install Dependencies
+
 ```bash
 pnpm install
 ```
 
 ### 4. Set Up Environment Variables
+
 Create a .env.local file inside the directory and add your credentials:
 
 RESEND_API_KEY=your_resend_api_key_here
@@ -51,11 +55,13 @@ RESEND_API_KEY=your_resend_api_key_here
 RESEND_EMAIL=your_email_here
 
 ### 5. Run the Development Server
+
 ```bash
 pnpm run dev
 ```
 
 ### Deployment
+
 This project is deployed using Vercel for seamless CI/CD.
 
 Automatic Deployments: Every push to the main branch triggers a new build.

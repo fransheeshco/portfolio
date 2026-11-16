@@ -40,10 +40,10 @@ a { color: inherit; text-decoration: none; }
 
 .about-section > p { max-width: 45rem; margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.75; }
 .hero-actions, .contact-actions { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1.25rem; }
-.button-primary, .button-secondary, .contact-form button, .run-button { display: inline-flex; min-height: 2.35rem; align-items: center; justify-content: center; gap: .4rem; padding: 0 .8rem; border: 1px solid var(--line); border-radius: .45rem; cursor: pointer; font-size: .72rem; font-weight: 650; transition: transform 140ms ease, background 140ms ease, border-color 140ms ease; }
+.button-primary, .button-secondary, .contact-form button { display: inline-flex; min-height: 2.35rem; align-items: center; justify-content: center; gap: .4rem; padding: 0 .8rem; border: 1px solid var(--line); border-radius: .45rem; cursor: pointer; font-size: .72rem; font-weight: 650; transition: transform 140ms ease, background 140ms ease, border-color 140ms ease; }
 .button-primary, .contact-form button { border-color: var(--inverse); background: var(--inverse); color: var(--inverse-text); }
 .button-secondary { background: var(--surface); color: var(--text); }
-.button-primary:hover, .button-secondary:hover, .contact-form button:hover, .run-button:hover { transform: translateY(-1px); }
+.button-primary:hover, .button-secondary:hover, .contact-form button:hover { transform: translateY(-1px); }
 
 .experience-list { display: grid; gap: 1.25rem; }
 .experience-item, .education-row { display: grid; grid-template-columns: 2.8rem 1fr; gap: .9rem; align-items: start; }
@@ -124,8 +124,12 @@ a { color: inherit; text-decoration: none; }
 .modal-actions { display: flex; gap: .35rem; }
 .modal-actions button, .modal-actions a, .icon-button { display: inline-flex; min-width: 2.25rem; min-height: 2.25rem; align-items: center; justify-content: center; gap: .35rem; padding: 0 .65rem; border: 1px solid var(--line); border-radius: .4rem; background: var(--surface); color: var(--muted); cursor: pointer; font-size: .65rem; }
 .icon-button { width: 2.25rem; padding: 0; }
-.project-modal-body { display: grid; grid-template-columns: 1.35fr .65fr; gap: 1.25rem; padding: 1.25rem; }
+.project-modal-body { padding: 1.25rem; }
 .modal-summary { margin: 0 0 1.25rem; color: var(--muted); font-size: .85rem; line-height: 1.65; }
+.project-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: .45rem; margin: 0 0 1.25rem; padding: 0; }
+.project-metrics > div { min-width: 0; padding: .9rem; border: 1px solid var(--line); border-radius: .55rem; background: var(--surface); }
+.project-metrics dt { color: var(--faint); font: .56rem/1.35 var(--font-mono); }
+.project-metrics dd { margin: .4rem 0 0; color: var(--text); font-size: 1rem; font-weight: 700; font-variant-numeric: tabular-nums; }
 .compare-grid { display: grid; grid-template-columns: 1fr 1fr; border-block: 1px solid var(--line); }
 .compare-grid > div { padding: 1.1rem 1.1rem 1.1rem 0; }
 .compare-grid > div + div { padding-left: 1.1rem; border-left: 1px solid var(--line); }
@@ -137,26 +141,10 @@ a { color: inherit; text-decoration: none; }
 .architecture-flow i { color: var(--faint); font-style: normal; }
 .modal-stack { padding: 1rem 0; color: var(--faint); font: .6rem/1.5 var(--font-mono); }
 .repo-link { display: inline-flex; align-items: center; gap: .4rem; font-size: .7rem; font-weight: 650; }
-.simulator { align-self: start; padding: 1rem; border: 1px solid var(--line); border-radius: .55rem; background: var(--surface); }
-.simulator-head { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding-bottom: .75rem; border-bottom: 1px solid var(--line); }
-.simulator-head > div { display: flex; align-items: center; gap: .4rem; font-size: .68rem; }
-.simulator-head > strong { color: var(--faint); font: 500 .55rem/1 var(--font-mono); }
-.load-control { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: 1rem 0; color: var(--muted); font: .58rem/1 var(--font-mono); }
-.load-control > div { display: flex; align-items: center; gap: .5rem; }
-.load-control button { display: grid; width: 1.65rem; height: 1.65rem; place-items: center; border: 1px solid var(--line); border-radius: .3rem; background: var(--canvas); color: var(--text); cursor: pointer; }
-.load-control strong { min-width: 1.25rem; text-align: center; }
-.request-line { display: grid; grid-template-columns: repeat(8,1fr); gap: .28rem; min-height: 4.5rem; align-content: start; padding: .75rem; border: 1px solid var(--line); border-radius: .35rem; background: var(--canvas); }
-.request-line i { height: .55rem; background: var(--line); animation: request-pulse 380ms ease both; }
-.request-line i.processed, .simulator-result i.processed { background: #22c55e; }
-.request-line i.queued, .simulator-result i.queued { background: #8b5cf6; }
-.simulator-result { display: flex; flex-wrap: wrap; gap: .7rem; padding-block: .8rem; color: var(--faint); font: .56rem/1 var(--font-mono); }
-.simulator-result span { display: flex; align-items: center; gap: .3rem; }
-.simulator-result i { width: .4rem; height: .4rem; }
-.run-button { width: 100%; background: var(--inverse); color: var(--inverse-text); }
 
 .resume-document { width: min(100% - 2rem,50rem); margin: 1rem auto 2rem; padding: clamp(2rem,5vw,4rem); background: #fff; color: #18181b; box-shadow: 0 10px 40px rgba(0,0,0,.2); }
-.resume-document > header { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; padding-bottom: 1.25rem; border-bottom: 2px solid #18181b; }
-.resume-document h3 { margin: 0; font-size: 2rem; letter-spacing: -.05em; }
+.resume-document > header { display: grid; grid-template-columns: minmax(12rem,.8fr) minmax(20rem,1.2fr); align-items: end; gap: 2rem; padding-bottom: 1.25rem; border-bottom: 2px solid #18181b; }
+.resume-document h3 { margin: 0; font-size: 2rem; line-height: 1.05; letter-spacing: -.05em; white-space: nowrap; }
 .resume-document header p { margin: .3rem 0 0; color: #52525b; font-size: .7rem; line-height: 1.5; }
 .resume-document > header > p { font-family: var(--font-mono); text-align: right; }
 .resume-document section { padding-block: 1rem; border-bottom: 1px solid #d4d4d8; }
@@ -170,7 +158,6 @@ a { color: inherit; text-decoration: none; }
 .resume-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; border-bottom: 0 !important; }
 
 @keyframes modal-in { from { opacity: 0; } to { opacity: 1; } }
-@keyframes request-pulse { from { opacity: .2; transform: scaleX(.2); transform-origin: left; } to { opacity: 1; transform: scaleX(1); } }
 @media (max-width: 720px) {
   .page-column { width: min(100% - 2rem,46rem); padding-top: 3.25rem; }
   .hero { align-items: flex-start; gap: 1.25rem; }
@@ -178,8 +165,6 @@ a { color: inherit; text-decoration: none; }
   .portrait-wrap { width: 6.5rem; height: 6.5rem; }
   .project-grid { grid-template-columns: 1fr; }
   .project-copy > p { min-height: 0; }
-  .project-modal-body { grid-template-columns: 1fr; }
-  .simulator { width: 100%; }
   .portfolio-dock { max-width: calc(100vw - 1rem); overflow-x: auto; }
   .portfolio-dock > a, .portfolio-dock .theme-toggle { width: 2rem; height: 2rem; flex: 0 0 auto; }
 }
@@ -262,6 +247,8 @@ a { color: inherit; text-decoration: none; }
 .project-card { border-radius: .75rem; background: var(--canvas); }
 .project-card:hover { border-color: var(--line); box-shadow: 0 0 0 2px var(--line-soft); transform: none; }
 .project-media { height: 12rem; aspect-ratio: auto; }
+.project-media.lobside-media { background: #fff; }
+.project-media.lobside-media img { object-fit: contain; }
 .project-copy { padding: 1.5rem 1.5rem .9rem; }
 .project-title-row h3 { font-size: .9rem; font-weight: 650; }
 .project-copy > p { margin-top: .65rem; color: var(--muted); font-size: .72rem; }
@@ -324,4 +311,5 @@ a { color: inherit; text-decoration: none; }
   .recognition-item { grid-template-columns: 1fr; padding-left: 2.5rem; }
   .recognition-list::before { left: .75rem; }
   .recognition-item::before { left: .37rem; }
+  .project-metrics { grid-template-columns: repeat(2,1fr); }
 }
